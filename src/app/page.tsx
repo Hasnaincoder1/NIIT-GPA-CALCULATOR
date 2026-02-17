@@ -92,10 +92,31 @@ export default function Home() {
 
   return (
     <main className="container fade-in">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>GPA Calculator</h1>
-        <button onClick={handleReset} className="btn btn-danger" style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}>
-          Reset
+      <header style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginBottom: '3rem',
+        textAlign: 'center',
+        padding: '2rem',
+        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(15, 23, 42, 0) 100%)',
+        borderRadius: '1rem',
+        border: '1px solid rgba(59, 130, 246, 0.2)'
+      }}>
+        <h1 style={{
+          fontSize: '2rem',
+          fontWeight: 'bold',
+          background: 'linear-gradient(to right, #60a5fa, #3b82f6)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          marginBottom: '0.5rem'
+        }}>
+          NASTP Institute of Information Technology
+        </h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>GPA Calculator</p>
+
+        <button onClick={handleReset} className="btn btn-danger" style={{ fontSize: '0.875rem', padding: '0.5rem 1rem', marginTop: '1.5rem' }}>
+          Reset All Data
         </button>
       </header>
 

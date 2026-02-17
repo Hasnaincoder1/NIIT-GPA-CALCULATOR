@@ -46,13 +46,15 @@ export default function SubjectRow({ subject, onChange, onRemove }: Props) {
 
             <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Credits</label>
-                <input
-                    type="number"
-                    min="0"
-                    step="0.5"
+                <select
                     value={subject.credits}
-                    onChange={(e) => onChange(subject.id, 'credits', parseFloat(e.target.value) || 0)}
-                />
+                    onChange={(e) => onChange(subject.id, 'credits', parseInt(e.target.value) || 0)}
+                    style={{ borderLeft: '4px solid var(--primary)' }}
+                >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
             </div>
 
             <div style={{ paddingTop: '1.25rem' }}>
