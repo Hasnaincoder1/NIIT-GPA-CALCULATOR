@@ -7,11 +7,13 @@ import SubjectCountInput from '@/components/SubjectCountInput';
 import SubjectRow from '@/components/SubjectRow';
 import GPAResult from '@/components/GPAResult';
 import GradeBreakdown from '@/components/GradeBreakdown';
+import CGPACalculator from '@/components/CGPACalculator';
 
 export default function Home() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [calculatorMode, setCalculatorMode] = useState<'gpa' | 'cgpa'>('gpa');
 
   // Load from local storage on mount
   useEffect(() => {
@@ -120,29 +122,64 @@ export default function Home() {
         </button>
       </header>
 
-      <section>
-        {subjects.map(subject => (
-          <SubjectRow
-            key={subject.id}
-            subject={subject}
-            onChange={handleChange}
-            onRemove={handleRemove}
-          />
-        ))}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+        <div style={{ background: 'var(--card-bg)', padding: '0.25rem', borderRadius: '0.5rem', border: '1px solid var(--border)', display: 'inline-flex' }}>
+          <button
+            onClick={() => setCalculatorMode('gpa')}
+            className="btn"
+            style={{
+              background: calculatorMode === 'gpa' ? 'var(--primary)' : 'transparent',
+              color: calculatorMode === 'gpa' ? 'white' : 'var(--text-muted)',
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.375rem'
+            }}
+          >
+            Semester GPA
+          </button>
+          <button
+            onClick={() => setCalculatorMode('cgpa')}
+            className="btn"
+            style={{
+              background: calculatorMode === 'cgpa' ? 'var(--primary)' : 'transparent',
+              color: calculatorMode === 'cgpa' ? 'white' : 'var(--text-muted)',
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.375rem'
+            }}
+          >
+            Calculate CGPA
+          </button>
+        </div>
+      </div>
 
-        <button
-          onClick={handleAddSubject}
-          className="btn btn-primary"
-          style={{ width: '100%', marginTop: '1rem', background: 'var(--card-bg)', border: '2px dashed var(--border)', color: 'var(--primary)' }}
-        >
-          + Add another course
-        </button>
-      </section>
+      {calculatorMode === 'gpa' ? (
+        <>
+          <section>
+            {subjects.map(subject => (
+              <SubjectRow
+                key={subject.id}
+                subject={subject}
+                onChange={handleChange}
+                onRemove={handleRemove}
+              />
+            ))}
 
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '1rem' }}>
-        <GPAResult gpa={gpa} totalCredits={totalCredits} />
-        <GradeBreakdown subjects={subjects} />
-      </section>
+            <button
+              onClick={handleAddSubject}
+              className="btn btn-primary"
+              style={{ width: '100%', marginTop: '1rem', background: 'var(--card-bg)', border: '2px dashed var(--border)', color: 'var(--primary)' }}
+            >
+              + Add another course
+            </button>
+          </section>
+
+          <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '1rem' }}>
+            <GPAResult gpa={gpa} totalCredits={totalCredits} />
+            <GradeBreakdown subjects={subjects} />
+          </section>
+        </>
+      ) : (
+        <CGPACalculator />
+      )}
     </main>
   );
 }
