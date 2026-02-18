@@ -16,6 +16,7 @@ export default function SubjectRow({ subject, onChange, onRemove }: Props) {
         if (g === 'A' || g === 'A-') return 'var(--success)';
         if (g.startsWith('B')) return '#fbbf24'; // Amber-400
         if (g.startsWith('C')) return '#f97316'; // Orange-500
+        if (g.startsWith('D')) return '#facc15'; // Yellow-400
         return 'var(--danger)';
     };
 
