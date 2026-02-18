@@ -10,6 +10,8 @@ export const GRADE_POINTS: Record<Grade, number> = {
     'C': 2.0,
     'C-': 1.67,
     'D': 1.0,
+    'F': 0.0,
+    'XF': 0.0,
 };
 
 export const calculateGPA = (subjects: Subject[]) => {
